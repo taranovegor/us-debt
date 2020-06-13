@@ -6,16 +6,53 @@ services:
         autowire: true
         autoconfigure: true
 
+    # > Common
+
+    App\:
+        resource: '../src/*'
+
+    Symfony\Component\Filesystem\Filesystem: ~
+
+    Symfony\Contracts\HttpClient\HttpClientInterface:
+        class: Symfony\Component\HttpClient\NativeHttpClient
+
+    JMS\Serializer\SerializerBuilder:
+        factory: ['JMS\Serializer\SerializerBuilder', 'create']
+
+    JMS\Serializer\SerializerInterface:
+        factory: ['@JMS\Serializer\SerializerBuilder', 'build']
+
+    # > Common
+
+    # > Console
+
     app.console:
         public: true
         class: App\Console\Application
         arguments:
             $name: '%app.name%'
 
-    App\:
-        resource: '../src/*'
-
     App\Command\:
         public: true
         resource: '../src/Command/*'
         tags: ['console.command']
+
+    # < Console
+
+    # > Accounting
+
+    App\Service\Accounting\USDebtAmountProvider:
+        arguments:
+            $url: '%app.accounting.us_debt.url%'
+
+    # < Accounting
+
+    # > Image
+
+    App\Service\Image\Builder\USDebtImageBuilder:
+        arguments:
+            $backgroundPathname: '%app.image.builder.us_debt.background_pathname%'
+            $fontPathname: '%app.image.builder.us_debt.font_pathname%'
+            $fontColor: '%app.image.builder.us_debt.font_color%'
+
+    # < Image

@@ -7,11 +7,11 @@
 
 namespace App;
 
-use App\DependencyInjection\Console\ContainerCommandLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
 use Symfony\Component\Dotenv\Dotenv;
 
 /**
@@ -52,14 +52,6 @@ class Kernel
     /**
      * @return string
      */
-    public function getAppPath(): string
-    {
-        return $this->appPath;
-    }
-
-    /**
-     * @return string
-     */
     public function getEnv(): string
     {
         return $this->env;
@@ -68,9 +60,27 @@ class Kernel
     /**
      * @return string
      */
+    public function getAppPath(): string
+    {
+        return $this->appPath;
+    }
+
+    /**
+     * @return string
+     */
     public function getConfigPath(): string
     {
         return $this->getAppPath().'/config';
+    }
+
+    /**
+     * @return array
+     */
+    public function getContainerParameters(): array
+    {
+        return [
+            'app.path' => $this->getAppPath(),
+        ];
     }
 
     /**
@@ -138,7 +148,7 @@ class Kernel
             return;
         }
 
-        $this->container = new ContainerBuilder();
+        $this->container = new ContainerBuilder(new EnvPlaceholderParameterBag($this->getContainerParameters()));
         $loader = new YamlFileLoader($this->container, new FileLocator($this->getConfigPath()));
         $loader->load('services.yml');
         $this->container->compile(true);
