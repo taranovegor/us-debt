@@ -1,0 +1,21 @@
+imports:
+    - { resource: parameters.yml }
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    app.console:
+        public: true
+        class: App\Console\Application
+        arguments:
+            $name: '%app.name%'
+
+    App\:
+        resource: '../src/*'
+
+    App\Command\:
+        public: true
+        resource: '../src/Command/*'
+        tags: ['console.command']

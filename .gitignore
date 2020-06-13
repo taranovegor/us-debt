@@ -1,0 +1,13 @@
+###> IntelliJ ###
+.idea
+*.iml
+out
+gen
+###< IntelliJ ###
+
+###> application ###
+/.env.local
+/.env.local.php
+/.env.*.locals
+/vendor/
+###< application ###
