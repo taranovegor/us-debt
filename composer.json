@@ -11,11 +11,21 @@
     ],
     "minimum-stability": "stable",
     "require": {
+        "php": "^7.4",
+        "ext-intl": "*",
+        "ext-decimal": "*",
+        "ext-bcmath": "*",
+        "ext-imagick": "*",
+        "ext-json": "*",
         "symfony/dependency-injection": "^5.0",
         "symfony/console": "^5.0",
         "symfony/config": "^5.0",
         "symfony/dotenv": "^5.0",
-        "symfony/yaml": "^5.0"
+        "symfony/yaml": "^5.0",
+        "symfony/filesystem": "^5.0",
+        "php-decimal/php-decimal": "^1.1",
+        "symfony/http-client": "^5.0",
+        "jms/serializer": "^3.7"
     },
     "autoload": {
         "psr-4": {

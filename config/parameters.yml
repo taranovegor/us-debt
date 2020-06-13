@@ -1,2 +1,8 @@
 parameters:
     app.name: 'US Debt'
+
+    app.accounting.us_debt.url: 'https://www.transparency.treasury.gov/services/api/fiscal_service/v1/accounting/od/debt_to_penny?sort=-data_date&page[size]=1'
+
+    app.image.builder.us_debt.background_pathname: '%app.path%/storage/image/us_debt/template.png'
+    app.image.builder.us_debt.font_pathname: '%app.path%/storage/font/us_debt/GayForcePro.ttf'
+    app.image.builder.us_debt.font_color: 'rgba(222, 47, 38, 1)'

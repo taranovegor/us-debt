@@ -2,11 +2,11 @@ FROM php:7.4-cli
 
 ARG TZ=UTC
 
-RUN apt-get update && apt-get -y --no-install-recommends install git libzip-dev libicu-dev unzip libmagickwand-dev
+RUN apt-get update && apt-get -y --no-install-recommends install git libzip-dev libicu-dev unzip libmagickwand-dev libmpdec-dev
 RUN apt-get update && apt-get -y --no-install-recommends install cron
 
-RUN docker-php-ext-install zip intl
-RUN pecl install imagick && docker-php-ext-enable imagick
+RUN docker-php-ext-install zip intl bcmath
+RUN pecl install imagick decimal && docker-php-ext-enable imagick decimal
 
 RUN useradd -ms /bin/bash user
 RUN usermod --shell /bin/bash www-data
