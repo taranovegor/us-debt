@@ -16,13 +16,21 @@ services:
     Symfony\Contracts\HttpClient\HttpClientInterface:
         class: Symfony\Component\HttpClient\NativeHttpClient
 
-    JMS\Serializer\SerializerBuilder:
-        factory: ['JMS\Serializer\SerializerBuilder', 'create']
+    # > Common
+
+    # > Serializer
+
+    App\Service\Serializer\SerializerBuilder:
+        factory: ['App\Serializer\SerializerBuilder', 'create']
+        calls:
+            - ['addSubscribingHandler', ['@App\EventSubscriber\Serializer\FileHandler']]
 
     JMS\Serializer\SerializerInterface:
-        factory: ['@JMS\Serializer\SerializerBuilder', 'build']
+        factory: ['@App\Serializer\SerializerBuilder', 'build']
 
-    # > Common
+    App\EventSubscriber\Serializer\FileHandler: ~
+
+    # < Serializer
 
     # > Console
 
@@ -31,11 +39,15 @@ services:
         class: App\Console\Application
         arguments:
             $name: '%app.name%'
+        calls:
+            - [add, ['@App\Command\AppDebug']]
 
     App\Command\:
         public: true
         resource: '../src/Command/*'
         tags: ['console.command']
+
+    App\Command\AppDebug: ~
 
     # < Console
 
@@ -56,3 +68,11 @@ services:
             $fontColor: '%app.image.builder.us_debt.font_color%'
 
     # < Image
+
+    # > Telegram
+
+    App\Service\Telegram\Api:
+        arguments:
+            $apiToken: '%env(APP_TELEGRAM_API_TOKEN)%'
+
+    # < Telegram
