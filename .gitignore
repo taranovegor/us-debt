@@ -10,4 +10,7 @@ gen
 /.env.local.php
 /.env.*.locals
 /vendor/
+
+/var/log
+!/var/log/.gitkeep
 ###< application ###

@@ -15,12 +15,27 @@ use App\ValueObject\Image;
 class ImageResizer
 {
     /**
-     * @param Image $image
+     * @param Image    $image
+     *
+     * @param int      $width
+     * @param int|null $height
      *
      * @return Image
+     *
+     * @throws \ImagickException
      */
-    public function resize(Image $image): Image
+    public function resize(Image $image, int $width, int $height = null): Image
     {
+        $resized = new \Imagick($image->getPathname());
+        $resized->resizeImage(
+            $width,
+            $height ?? (int) $resized->getImageHeight() / ($resized->getImageWidth() / $width),
+            \Imagick::FILTER_CATROM,
+            1,
+            true
+        );
+        $resized->writeImage($image->getPathname());
+
         return $image;
     }
 }

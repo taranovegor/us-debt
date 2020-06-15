@@ -13,6 +13,8 @@ services:
 
     Symfony\Component\Filesystem\Filesystem: ~
 
+    Symfony\Component\Stopwatch\Stopwatch: ~
+
     Symfony\Contracts\HttpClient\HttpClientInterface:
         class: Symfony\Component\HttpClient\NativeHttpClient
 
@@ -21,6 +23,10 @@ services:
 
     JMS\Serializer\SerializerInterface:
         factory: ['@JMS\Serializer\SerializerBuilder', 'build']
+
+    TuriBot\Client:
+        arguments:
+            $token: '%env(APP_TELEGRAM_BOT_API_TOKEN)%'
 
     # > Common
 
@@ -31,11 +37,17 @@ services:
         class: App\Console\Application
         arguments:
             $name: '%app.name%'
+        calls:
+            - ['add', ['@App\Command\Publisher\PublishUSDebtTelegramStickerCommand']]
+            - ['add', ['@App\Command\Publisher\PublishUSDebtTelegramStickerSetCommand']]
 
     App\Command\:
         public: true
         resource: '../src/Command/*'
         tags: ['console.command']
+
+    App\Command\Publisher\PublishUSDebtTelegramStickerCommand: ~
+    App\Command\Publisher\PublishUSDebtTelegramStickerSetCommand: ~
 
     # < Console
 
@@ -56,3 +68,21 @@ services:
             $fontColor: '%app.image.builder.us_debt.font_color%'
 
     # < Image
+
+    # > Publisher
+
+    App\Service\Publisher\USDebtTelegramStickerPublisher:
+        arguments:
+            $userId: '%app.publisher.us_debt.telegram.sticker.user.id%'
+            $setName: '%app.publisher.us_debt.telegram.sticker.set.name%'
+            $emojis: '%app.publisher.us_debt.telegram.sticker.emojis%'
+
+
+    App\Service\Publisher\USDebtTelegramStickerSetPublisher:
+        arguments:
+            $userId: '%app.publisher.us_debt.telegram.sticker.user.id%'
+            $setName: '%app.publisher.us_debt.telegram.sticker.set.name%'
+            $setTitle: '%app.publisher.us_debt.telegram.sticker.set.title%'
+            $emojis: '%app.publisher.us_debt.telegram.sticker.emojis%'
+
+    # < Publisher

@@ -17,6 +17,8 @@
         "ext-bcmath": "*",
         "ext-imagick": "*",
         "ext-json": "*",
+        "ext-curl": "*",
+        "ext-iconv": "*",
         "symfony/dependency-injection": "^5.0",
         "symfony/console": "^5.0",
         "symfony/config": "^5.0",
@@ -25,7 +27,9 @@
         "symfony/filesystem": "^5.0",
         "php-decimal/php-decimal": "^1.1",
         "symfony/http-client": "^5.0",
-        "jms/serializer": "^3.7"
+        "jms/serializer": "^3.7",
+        "davtur19/turibot": "^1.5",
+        "symfony/stopwatch": "^5.0"
     },
     "autoload": {
         "psr-4": {
