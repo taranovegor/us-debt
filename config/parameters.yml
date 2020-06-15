@@ -6,3 +6,8 @@ parameters:
     app.image.builder.us_debt.background_pathname: '%app.path%/storage/image/us_debt/template.png'
     app.image.builder.us_debt.font_pathname: '%app.path%/storage/font/us_debt/GayForcePro.ttf'
     app.image.builder.us_debt.font_color: 'rgba(222, 47, 38, 1)'
+
+    app.publisher.us_debt.telegram.sticker.user.id: '%env(APP_PUBLISHER_US_DEBT_TELEGRAM_STICKER_USER_ID)%'
+    app.publisher.us_debt.telegram.sticker.set.name: '%env(APP_PUBLISHER_US_DEBT_TELEGRAM_STICKER_SET_NAME)%'
+    app.publisher.us_debt.telegram.sticker.set.title: '\ud83c\uddfa\ud83c\uddf8 U.S. Debt'
+    app.publisher.us_debt.telegram.sticker.emojis: '\ud83d\udcb8'

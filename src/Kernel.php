@@ -148,6 +148,8 @@ class Kernel
             return;
         }
 
+        $this->loadEnvironment();
+
         $this->container = new ContainerBuilder(new EnvPlaceholderParameterBag($this->getContainerParameters()));
         $loader = new YamlFileLoader($this->container, new FileLocator($this->getConfigPath()));
         $loader->load('services.yml');
