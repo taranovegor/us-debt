@@ -23,5 +23,5 @@ fi
 docker-compose $DOCKER_COMPOSE_FILES build
 docker-compose $DOCKER_COMPOSE_FILES up -d
 
-docker-compose exec --user user php php -d memory_limit=2g /usr/bin/composer install
+docker-compose exec php php -d memory_limit=2g /usr/bin/composer install
 docker-compose exec php chown -R www-data:www-data /var/www/html/var/
