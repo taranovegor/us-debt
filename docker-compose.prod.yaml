@@ -1,18 +1,10 @@
 version: '3.4'
 services:
-    nginx:
-        build:
-            target: production
-        volumes:
-            - public:/var/www/html/public/
     php_cron:
         build:
             target: production
         volumes:
-            - public:/var/www/html/public/
             - logs:/var/www/html/var/log/
 volumes:
-    public:
-        name: us_debt_public
     logs:
         name: us_debt_logs
