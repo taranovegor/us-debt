@@ -1,0 +1,14 @@
+/.idea/
+/.git/
+/project/var/
+/project/vendor/
+/.editorconfig
+/.gitignore
+/composer.sh
+/console.sh
+/deploy.sh
+/docker-compose.dev.yaml
+/docker-compose.prod.yaml
+/docker-compose.yaml
+/exec.sh
+/README.md

@@ -1,0 +1,28 @@
+version: '3.4'
+services:
+    nginx:
+        container_name: us_debt_nginx
+        build:
+            context: ./
+            dockerfile: ./docker/nginx/Dockerfile
+            args:
+                - TZ
+                - HOST_UID
+                - HOST_GID
+        image: us_debt_nginx
+        ports:
+            - $NGINX_EXPOSE_PORT:80
+    php_cron:
+        container_name: us_debt_php_cron
+        build:
+            context: ./
+            dockerfile: ./docker/php/Dockerfile
+            args:
+                - PHP_ROLE=cron
+                - PHP_MODE=cli
+                - TZ
+                - HOST_UID
+                - HOST_GID
+        image: us_debt_php_cron
+        extra_hosts:
+            - host_machine:$HOST_MACHINE

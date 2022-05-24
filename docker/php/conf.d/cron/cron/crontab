@@ -1,0 +1,3 @@
+SHELL=/bin/bash
+
+0 5 * * * /usr/local/bin/php /var/www/html/bin/console --no-ansi app:publisher:publish_us_debt_telegram_sticker --no-ansi -vv |& tee -a /var/www/html/var/log/crontab.log
