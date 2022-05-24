@@ -67,7 +67,6 @@ Application state management
 | HOST_UID                                        | Uid of the user from which the application is launched and runs. **Affects file permissions** |
 | HOST_GID                                        | Gid of the user from which the application is launched and runs. **Affects file permissions** |
 | HOST_MACHINE                                    | Accessible IP address for container access to localhost                                       |
-| NGINX_EXPOSE_PORT                               | Port on which the nginx container will be launched and available                              |
 | APP_ENV                                         | Environment of application                                                                    |
 | APP_TELEGRAM_BOT_API_TOKEN                      | Token to access Telegram bot API                                                              |
 | APP_PUBLISHER_US_DEBT_TELEGRAM_STICKER_USER_ID  | Stickerpack owner id                                                                          |
