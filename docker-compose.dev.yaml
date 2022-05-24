@@ -1,0 +1,14 @@
+version: '3.4'
+services:
+    nginx:
+        build:
+            target: development
+        volumes:
+            - ./public/:/var/www/html/public/
+    php_cron:
+        build:
+            target: development
+        volumes:
+            - ./:/var/www/html/
+        environment:
+            - PHP_IDE_CONFIG
