@@ -11,48 +11,14 @@ use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Class DebtDataDTO
+ *
+ * @link https://fiscaldata.treasury.gov/datasets/debt-to-the-penny/debt-to-the-penny
  */
 class DebtDataDTO
 {
     /**
      * @Serializer\Type("string")
-     * @Serializer\SerializedName("data_date")
-     */
-    public string $dataDate;
-
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("debt_held_public_amt")
-     */
-    public string $debtHeldByThePublic;
-
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("intragov_hold_amt")
-     */
-    public string $intragovernmentalHoldings;
-
-    /**
-     * @Serializer\Type("string")
      * @Serializer\SerializedName("tot_pub_debt_out_amt")
      */
     public string $totalPublicDebtOutstanding;
-
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("reporting_calendar_year")
-     */
-    public string $calendarYear;
-
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("reporting_calendar_month")
-     */
-    public string $calendarMonthNumber;
-
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("reporting_calendar_day")
-     */
-    public string $calendarDayNumber;
 }
