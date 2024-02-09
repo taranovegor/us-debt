@@ -13,6 +13,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
 use Symfony\Component\Dotenv\Dotenv;
+use Symfony\Component\Dotenv\Exception\PathException;
 
 /**
  * Class Kernel
@@ -133,7 +134,10 @@ class Kernel
      */
     protected function loadEnvironment(): void
     {
-        (new Dotenv())->loadEnv($this->getAppPath().'/.env');
+        try {
+            (new Dotenv())->loadEnv($this->getAppPath().'/.env');
+        } catch (PathException $e) {
+        }
         $this->env = $_ENV['APP_ENV'];
     }
 

@@ -1,0 +1,43 @@
+name: Publish
+
+on:
+  push:
+    branches: ['dev']
+  release:
+    types: ['published']
+
+env:
+  GO111MODULE: on
+  BW_SECRETS: |
+    230114d0-459d-41f0-9525-b0a100b05ff6 > DOCKER_REGISTRY_USERNAME
+    57d1c34f-e837-4d71-9e62-b0a100b04ae8 > DOCKER_REGISTRY_PASSWORD
+
+jobs:
+  push:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          platforms: linux/amd64,linux/arm64
+      - name: Get Secrets
+        uses: bitwarden/sm-action@v1
+        with:
+          access_token: ${{ secrets.BW_ACCESS_TOKEN }}
+          secrets: ${{ env.BW_SECRETS }}
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build & Push to Docker Hub
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: taranovegor/us-debt:latest
+          platforms: linux/amd64,linux/arm64

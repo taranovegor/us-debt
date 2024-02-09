@@ -1,0 +1,13 @@
+version: '3.7'
+services:
+    app:
+        image: taranovegor/us-debt:latest
+        container_name: us_debt_app
+        restart: on-failure
+        environment:
+            - APP_ENV
+            - APP_PUBLISHER_US_DEBT_TELEGRAM_STICKER_SET_NAME
+            - APP_PUBLISHER_US_DEBT_TELEGRAM_STICKER_USER_ID
+            - APP_TELEGRAM_BOT_API_TOKEN
+        ports:
+            - $HTTP_EXPOSE_PORT:80

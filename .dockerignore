@@ -1,0 +1,9 @@
+.github
+.env
+.env.local
+.env.dist
+.gitignore
+docker-compose.yaml
+Dockerfile
+Makefile
+README.md
